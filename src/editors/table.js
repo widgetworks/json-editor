@@ -100,7 +100,7 @@ JSONEditor.defaults.editors.table = JSONEditor.defaults.editors.array.extend({
     this._super();
   },
   getItemDefault: function() {
-    return $extend({},{default:this.item_default}).default;
+    return $extend({},{'default':this.item_default})['default'];
   },
   getItemTitle: function() {
     return this.item_title;

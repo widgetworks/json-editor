@@ -1,6 +1,6 @@
 JSONEditor.defaults.editors.string = JSONEditor.AbstractEditor.extend({
   getDefault: function() {    
-    return this.schema.default || '';
+    return this.schema['default'] || '';
   },
   register: function() {
     this._super();
@@ -93,9 +93,9 @@ JSONEditor.defaults.editors.string = JSONEditor.AbstractEditor.extend({
     }
 
     // Select box
-    if(this.schema.enum) {
+    if(this.schema['enum']) {
       this.input_type = 'select';
-      this.select_options = this.schema.enum;
+      this.select_options = this.schema['enum'];
       this.input = this.theme.getSelectInput(this.select_options);
     }
     // Dynamic Select box

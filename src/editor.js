@@ -341,7 +341,7 @@ JSONEditor.AbstractEditor = Class.extend({
     }
   },
   getDefault: function() {
-    return this.schema.default || null;
+    return this.schema['default'] || null;
   },
 
   getTheme: function() {

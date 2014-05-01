@@ -226,10 +226,10 @@ JSONEditor.Validator = Class.extend({
     }
 
     // `enum`
-    if(schema.enum) {
+    if(schema['enum']) {
       valid = false;
-      for(i=0; i<schema.enum.length; i++) {
-        if(stringified === JSON.stringify(schema.enum[i])) valid = true;
+      for(i=0; i<schema['enum'].length; i++) {
+        if(stringified === JSON.stringify(schema['enum'][i])) valid = true;
       }
       if(!valid) {
         errors.push({
@@ -241,9 +241,9 @@ JSONEditor.Validator = Class.extend({
     }
 
     // `extends` (version 3)
-    if(schema.extends) {
-      for(i=0; i<schema.extends.length; i++) {
-        errors = errors.concat(this._validateSchema(schema.extends[i],value,path));
+    if(schema['extends']) {
+      for(i=0; i<schema['extends'].length; i++) {
+        errors = errors.concat(this._validateSchema(schema['extends'][i],value,path));
       }
     }
 
@@ -810,18 +810,18 @@ JSONEditor.Validator = Class.extend({
       delete extended.allOf;
     }
     // extends schemas should be merged into parent
-    if(schema.extends) {
+    if(schema['extends']) {
       // If extends is a schema
-      if(!(schema.extends instanceof Array)) {
-        extended = this.extend(extended,this.expandSchema(schema.extends));
+      if(!(schema['extends'] instanceof Array)) {
+        extended = this.extend(extended,this.expandSchema(schema['extends']));
       }
       // If extends is an array of schemas
       else {
-        for(i=0; i<schema.extends.length; i++) {
-          extended = this.extend(extended,this.expandSchema(schema.extends[i]));
+        for(i=0; i<schema['extends'].length; i++) {
+          extended = this.extend(extended,this.expandSchema(schema['extends'][i]));
         }
       }
-      delete extended.extends;
+      delete extended['extends'];
     }
     // parent should be merged into oneOf schemas
     if(schema.oneOf) {

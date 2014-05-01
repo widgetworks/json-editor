@@ -1,7 +1,7 @@
 // Enum Editor (used for objects and arrays with enumerated values)
-JSONEditor.defaults.editors.enum = JSONEditor.AbstractEditor.extend({
+JSONEditor.defaults.editors['enum'] = JSONEditor.AbstractEditor.extend({
   getDefault: function() {
-    return this.schema.enum[0];
+    return this.schema['enum'][0];
   },
   addProperty: function() {
     this._super();
@@ -23,15 +23,15 @@ JSONEditor.defaults.editors.enum = JSONEditor.AbstractEditor.extend({
 
     this.options.enum_titles = this.options.enum_titles || [];
 
-    this.enum = this.schema.enum;
+    this['enum'] = this.schema['enum'];
     this.selected = 0;
     this.select_options = [];
     this.html_values = [];
 
     var self = this;
-    for(var i=0; i<this.enum.length; i++) {
+    for(var i=0; i<this['enum'].length; i++) {
       this.select_options[i] = this.options.enum_titles[i] || "Value "+(i+1);
-      this.html_values[i] = this.getHTML(this.enum[i]);
+      this.html_values[i] = this.getHTML(this['enum'][i]);
     }
 
     // Switcher
@@ -50,23 +50,23 @@ JSONEditor.defaults.editors.enum = JSONEditor.AbstractEditor.extend({
 
     this.switcher.addEventListener('change',function() {
       self.selected = self.select_options.indexOf(this.value);
-      self.value = self.enum[self.selected];
+      self.value = self['enum'][self.selected];
       self.refreshValue();
       
       if(self.parent) self.parent.onChildEditorChange(self);
       else self.jsoneditor.onChange();
     });
-    this.value = this.enum[0];
+    this.value = this['enum'][0];
     this.refreshValue();
     this.jsoneditor.notifyWatchers(this.path);
 
-    if(this.enum.length === 1) this.switcher.style.display = 'none';
+    if(this['enum'].length === 1) this.switcher.style.display = 'none';
   },
   refreshValue: function() {
     var self = this;
     self.selected = -1;
     var stringified = JSON.stringify(this.value);
-    $each(this.enum, function(i, el) {
+    $each(this['enum'], function(i, el) {
       if(stringified === JSON.stringify(el)) {
         self.selected = i;
         return false;
@@ -74,7 +74,7 @@ JSONEditor.defaults.editors.enum = JSONEditor.AbstractEditor.extend({
     });
 
     if(self.selected<0) {
-      self.setValue(self.enum[0]);
+      self.setValue(self['enum'][0]);
       return;
     }
 

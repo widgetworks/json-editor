@@ -53,7 +53,7 @@ JSONEditor.defaults.resolvers.unshift(function(schema) {
 });
 // Use the `enum` or `select` editors for schemas with enumerated properties
 JSONEditor.defaults.resolvers.unshift(function(schema) {
-  if(schema.enum) {
+  if(schema['enum']) {
     if(schema.type === "array" || schema.type === "object") {
       return "enum";
     }

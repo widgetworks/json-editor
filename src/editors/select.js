@@ -1,6 +1,6 @@
 JSONEditor.defaults.editors.select = JSONEditor.AbstractEditor.extend({
   getDefault: function() {
-    return this.schema.default || '';
+    return this.schema['default'] || '';
   },
   setValue: function(value,initial) {
     value = this.typecast(value||'');
@@ -76,8 +76,8 @@ JSONEditor.defaults.editors.select = JSONEditor.AbstractEditor.extend({
     this.enum_display = [];
 
     // Enum options enumerated
-    if(this.schema.enum) {
-      $each(this.schema.enum,function(i,option) {
+    if(this.schema['enum']) {
+      $each(this.schema['enum'],function(i,option) {
         self.enum_options[i] = ""+option;
         self.enum_display[i] = ""+option;
         self.enum_values[i] = self.typecast(option);

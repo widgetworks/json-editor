@@ -1,9 +1,15 @@
 var $isplainobject = function( obj ) {
   // Not own constructor property must be Object
-  if ( obj.constructor &&
-    !obj.hasOwnProperty('constructor') &&
-    !obj.constructor.prototype.hasOwnProperty('isPrototypeOf')) {
-    return false;
+  try {
+    if ( obj.constructor &&
+      (obj.hasOwnProperty == null ||
+       !obj.hasOwnProperty('constructor')) &&
+      (obj.constructor.prototype.hasOwnProperty == null ||
+      !obj.constructor.prototype.hasOwnProperty('isPrototypeOf'))) {
+      return false;
+    }
+  } catch (e){
+    console.log(obj, e);
   }
 
   // Own properties are enumerated firstly, so to speed up,

@@ -1,6 +1,6 @@
 JSONEditor.defaults.editors.array = JSONEditor.AbstractEditor.extend({
   getDefault: function() {
-    return this.schema.default || [];
+    return this.schema['default'] || [];
   },
   register: function() {
     this._super();
@@ -191,7 +191,7 @@ JSONEditor.defaults.editors.array = JSONEditor.AbstractEditor.extend({
       child_editors: editor.getChildEditors()? true : false,
       title: schema.title || 'item',
       width: editor.getNumColumns(),
-      default: editor.getDefault()
+      'default': editor.getDefault()
     };
     editor.destroy();
     if(tmp.parentNode) tmp.parentNode.removeChild(tmp);
@@ -313,7 +313,7 @@ JSONEditor.defaults.editors.array = JSONEditor.AbstractEditor.extend({
     // Make sure value has between minItems and maxItems items in it
     if(this.schema.minItems) {
       while(value.length < this.schema.minItems) {
-        value.push(this.getItemInfo(value.length).default);
+        value.push(this.getItemInfo(value.length)['default']);
       }
     }
     if(this.getMax() && value.length > this.getMax()) {

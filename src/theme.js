@@ -1,10 +1,17 @@
+// Avoid Member not found error in IE8.
+function _setStyle(el){
+  if (!el.style){
+    el.style = {}
+  }
+}
+
 JSONEditor.AbstractTheme = Class.extend({
   getContainer: function() {
     return document.createElement('div');
   },
   getFloatRightLinkHolder: function() {
     var el = document.createElement('div');
-    el.style = el.style || {};
+    _setStyle(el);
     el.style.float = 'right';
     el.style['margin-left'] = '10px';
     return el;
@@ -109,7 +116,7 @@ JSONEditor.AbstractTheme = Class.extend({
   },
   getTextareaInput: function() {
     var el = document.createElement('textarea');
-    el.style = el.style || {};
+    _setStyle(el);
     el.style.width = '100%';
     el.style.height = '300px';
     el.style.boxSizing = 'border-box';
@@ -145,7 +152,7 @@ JSONEditor.AbstractTheme = Class.extend({
   },
   getIndentedPanel: function() {
     var el = document.createElement('div');
-    el.style = el.style || {};
+    _setStyle(el);
     el.style.paddingLeft = '10px';
     el.style.marginLeft = '10px';
     el.style.borderLeft = '1px solid #ccc';
@@ -208,7 +215,7 @@ JSONEditor.AbstractTheme = Class.extend({
   },
   getErrorMessage: function(text) {
     var el = document.createElement('p');
-    el.style = el.style || {};
+    _setStyle(el);
     el.style.color = 'red';
     el.appendChild(document.createTextNode(text));
     return el;
@@ -227,7 +234,7 @@ JSONEditor.AbstractTheme = Class.extend({
     return el;
   },
   applyStyles: function(el,styles) {
-    el.style = el.style || {};
+    _setStyle(el);
     for(var i in styles) {
       if(!styles.hasOwnProperty(i)) continue;
       el.style[i] = styles[i];
@@ -254,7 +261,7 @@ JSONEditor.AbstractTheme = Class.extend({
   getTab: function(span) {
     var el = document.createElement('div');
     el.appendChild(span);
-    el.style = el.style || {};
+    _setStyle(el);
     this.applyStyles(el,{
       border: '1px solid #ccc',
       borderWidth: '1px 0 1px 1px',
